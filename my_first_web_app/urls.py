@@ -17,7 +17,7 @@ from django.http import HttpResponse
 from django.urls import path
 
 def home_page(request):
-    return HttpResponse('Hi, this is the home page')
+    return HttpResponse('<h1>Hi</h1><p>this is the home page</p>')
     # here's where we'll put instructions for how to respond to requests to 'localhost:8000/home'
 
 urlpatterns = [
