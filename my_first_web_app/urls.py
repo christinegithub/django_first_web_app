@@ -17,6 +17,7 @@ from random import randint
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import path
+from django.template import Template, Context
 
 def home_page(request):
     context = {'name': 'Betty Maker'}
@@ -25,14 +26,27 @@ def home_page(request):
 
 def portfolio_page(request):
 
-    random_number = randint(0,100)
-    image_url = "https://picsum.photos/400/600/?image={}".format(random_number)
-    context = {'gallery_image': image_url}
+    image_urls = []
+    for i in range(5):
+        random_number = randint(0,100)
+        image_urls.append("https://picsum.photos/400/600/?image={}".format(random_number))
+
+
+    context = {'gallery_images': image_urls}
     response = render(request, 'gallery.html', context)
     return HttpResponse(response)
-    
+
+def about_me_page(request):
+    skills = ['html', 'css', 'python']
+    interests = ['dance', 'travel']
+
+    context = {'skills': skills, 'interests': interests}
+    response = render(request, 'about_me.html', context)
+    return HttpResponse(response)
+
 
 urlpatterns = [
     path('home/', home_page),
-    path('portfolio/', portfolio_page)
+    path('portfolio/', portfolio_page),
+    path('about_me/', about_me_page)
 ]
