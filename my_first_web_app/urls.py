@@ -44,9 +44,17 @@ def about_me_page(request):
     response = render(request, 'about_me.html', context)
     return HttpResponse(response)
 
+def favourites_page(request):
+
+    fave_links = ["https://www.google.com/", "https://www.facebook.com/"]
+    context = {'links': fave_links}
+    response = render(request, 'favourites.html', context)
+    return HttpResponse(response)
+
 
 urlpatterns = [
     path('home/', home_page),
     path('portfolio/', portfolio_page),
-    path('about_me/', about_me_page)
+    path('about_me/', about_me_page),
+    path('favourites/', favourites_page),
 ]
